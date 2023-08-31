@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
-printInteger(int aNumber){
-  print('The number is $aNumber.'); //콘솔에 입력
-}
+
 
 //main함수에서 항상 시작
 void main() {
@@ -10,29 +8,37 @@ void main() {
 
 }
 
+class MyApp extends StatefulWidget{
+  @override
+  State<StatefulWidget> createState(){
+    return _MyApp();
+  }
+}
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
 
-  // This widget is the root of your application.
+class _MyApp extends State<MyApp> {
+  var switchValue = false;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-
-      home: Container(
-      color: Colors.white,
-      child : Center(
-        child: Text(
-          'hello\nFlutter',
-          textAlign: TextAlign.center,
-          style: TextStyle(color: Colors.blue, fontSize: 20),),
-      )));
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+        ),
+        darkTheme: ThemeData.light(),
+        home: Scaffold(
+          body: Center(
+            child: Switch(
+                value: switchValue,
+                onChanged: (value) {
+                  setState(() { //화면의 값을 바꾸기 위함
+                    print(value);
+                    switchValue = value;
+                  });
+                }),
+          ),
+        ));
   }
 }
 
